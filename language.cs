@@ -19,25 +19,28 @@ public class Language {
     weightedSoftcs = new List<string>();
     weightedHardcs = new List<string>();
 
+    syllables = new List<string>();
+    vocabulary = new List<Word>();
+  }
+
+  public void initialize()
+  {
     weightVowels();
     weightSoftcs();
     weightHardcs();
 
-    syllables = new List<string>();
-    vocabulary = new List<Word>();
-
-    Console.WriteLine("Generating syllables...");
-    for (int i = 0; i < 25; i++)
+    // Console.WriteLine("Generating syllables...");
+    for (int i = 0; i < 100; i++)
     {
       syllables.Add(makeSyllable());
     }
-    Console.WriteLine(syllables.Count + " syllables generated successfully.\n");
+    // Console.WriteLine(syllables.Count + " syllables generated successfully.\n");
 
     for (int i = 0; i < 25; i++)
     {
       Word newWord = new Word();
       newWord.Assemble(syllables);
-      Console.WriteLine("- " + newWord.print());
+      Console.WriteLine("\n- " + newWord.print());
       Console.WriteLine(newWord.printEmph());
 
       vocabulary.Add(newWord);
@@ -59,7 +62,7 @@ public class Language {
         }
       }
     }
-    Console.WriteLine("Vowel count populated.");
+    // Console.WriteLine("Vowel count populated.");
   }
 
   public void weightSoftcs()
@@ -75,7 +78,7 @@ public class Language {
         }
       }
     }
-    Console.WriteLine("Soft consonant count populated.");
+    // Console.WriteLine("Soft consonant count populated.");
   }
 
   public void weightHardcs()
@@ -91,7 +94,7 @@ public class Language {
         }
       }
     }
-    Console.WriteLine("Hard consonant count populated.");
+    // Console.WriteLine("Hard consonant count populated.");
   }
 
   public string makeSyllable()
@@ -99,28 +102,35 @@ public class Language {
     string newSyl = "";
     
     // Console.WriteLine("Generating new syllable...");
+
+    // Hard consonant?
     if (Globals.rand.Next(3) == 0)
     {
       newSyl += weightedHardcs[Globals.rand.Next(weightedHardcs.Count)];
     }
 
+    // Soft consonant?
     if (Globals.rand.Next(3) == 0)
     {
       newSyl += weightedSoftcs[Globals.rand.Next(weightedSoftcs.Count)];
     }
 
+    // Vowel
     newSyl += weightedVowels[Globals.rand.Next(weightedVowels.Count)];
 
-    if (Globals.rand.Next(4) == 0)
+    // Second vowel?
+    if (Globals.rand.Next(5) == 0)
     {
       newSyl += weightedVowels[Globals.rand.Next(weightedVowels.Count)];
     }
 
+    // Soft consonant?
     if (Globals.rand.Next(3) == 0)
     {
       newSyl += weightedSoftcs[Globals.rand.Next(weightedSoftcs.Count)];
     }
     
+    // Hard consonant?
     if (Globals.rand.Next(3) == 0)
     {
       newSyl += weightedHardcs[Globals.rand.Next(weightedHardcs.Count)];
@@ -129,4 +139,25 @@ public class Language {
     // Console.WriteLine("New syllable '" + newSyl + "' generated.");
     return newSyl;
   }
+
+  //public void saveAlphabet()
+  //{
+    //string fileName = "alpha_" + name + ".txt";
+    // Check if file already exists. If yes, delete it.     
+    //if (File.Exists(fileName))    
+    //{    
+    //    File.Delete(fileName);    
+    //}
+    
+    // Create a new file     
+    //using (StreamWriter sw = File.CreateText(fileName))    
+    //{
+    //  string line = "";
+    //  for (int i = 0; i < weightedVowels; i++)
+    //  {
+    //    line += weightedVowels[i];
+    //  }
+    //  sw.WriteLine("New file created: {0}");
+    //}   
+  //}
 }
