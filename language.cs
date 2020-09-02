@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 public class Language {
   public string name;
@@ -47,6 +48,11 @@ public class Language {
     }
 
     name = vocabulary[0].print();
+
+    Console.WriteLine("");
+    saveAlphabet();
+    saveSyllables();
+    saveVocab();
   }
 
   public void weightVowels()
@@ -140,24 +146,89 @@ public class Language {
     return newSyl;
   }
 
-  //public void saveAlphabet()
-  //{
-    //string fileName = "alpha_" + name + ".txt";
+  public void saveAlphabet()
+  {
+    Console.WriteLine("Saving alphabet weights...");
+
+    string fileName = "languages/alpha_" + name + ".txt";
     // Check if file already exists. If yes, delete it.     
-    //if (File.Exists(fileName))    
-    //{    
-    //    File.Delete(fileName);    
-    //}
+    if (File.Exists(fileName))    
+    {    
+        File.Delete(fileName);    
+    }
     
     // Create a new file     
-    //using (StreamWriter sw = File.CreateText(fileName))    
-    //{
-    //  string line = "";
-    //  for (int i = 0; i < weightedVowels; i++)
-    //  {
-    //    line += weightedVowels[i];
-    //  }
-    //  sw.WriteLine("New file created: {0}");
-    //}   
-  //}
+    using (StreamWriter sw = File.CreateText(fileName))    
+    {
+      string line = "";
+      for (int i = 0; i < weightedVowels.Count; i++)
+      {
+        line += weightedVowels[i];
+      }
+      sw.WriteLine(line);
+
+      line = "";
+      for (int i = 0; i < weightedSoftcs.Count; i++)
+      {
+        line += weightedSoftcs[i];
+      }
+      sw.WriteLine(line);
+
+      line = "";
+      for (int i = 0; i < weightedHardcs.Count; i++)
+      {
+        line += weightedHardcs[i];
+      }
+      sw.WriteLine(line);
+    }
+    
+    Console.WriteLine("Alphabet weights saved."); 
+  }
+
+  public void saveSyllables()
+  {
+    Console.WriteLine("Saving syllables...");
+
+    string fileName = "languages/syl_" + name + ".txt";
+    //Check if file already exists. If yes, delete it.
+    if (File.Exists(fileName))    
+    {    
+        File.Delete(fileName);    
+    }
+
+    // Create a new file     
+    using (StreamWriter sw = File.CreateText(fileName))
+    {
+      for (int i = 0; i < syllables.Count; i++)
+      {
+        sw.WriteLine(syllables[i]);
+      }
+    }
+
+    Console.WriteLine("Syllables saved.");
+  }
+
+  public void saveVocab()
+  {
+    Console.WriteLine("Saving vocabulary...");
+
+    string fileName = "languages/vocab_" + name + ".txt";
+    //Check if file already exists. If yes, delete it.
+    if (File.Exists(fileName))    
+    {    
+        File.Delete(fileName);    
+    }
+
+    // Create a new file     
+    using (StreamWriter sw = File.CreateText(fileName))
+    {
+      for (int i = 0; i < vocabulary.Count; i++)
+      {
+        sw.WriteLine(vocabulary[i].printEmph());
+        Console.WriteLine("Saving '" + vocabulary[i].print() + "'.");
+      }
+    }
+
+    Console.WriteLine("Vocabulary saved.");
+  }
 }
