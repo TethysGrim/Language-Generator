@@ -13,7 +13,7 @@ public class Word
     emphasis = 0;
   }
 
-  public void Assemble(List<string> _syl)
+  public void initialize(List<string> _syl)
   {
     int sylLength = 1;
 
@@ -31,6 +31,31 @@ public class Word
     }
 
     emphasis = Globals.rand.Next(sylLength);
+  }
+
+  public void parse(string _str)
+  {
+    Console.WriteLine ("\nParsing '" + _str + "'...");
+
+    string newSyl = "";
+    foreach (char letter in _str)
+    {
+      Console.Write(letter.ToString());
+      if ((letter == '*') || (letter == ')'))
+      {
+        components.Add(newSyl);
+        newSyl = "";
+      }
+      if ((letter != '(') && (letter != '*') && (letter != ')'))
+      {
+        newSyl += letter.ToString().ToLower();
+        if (letter.ToString().ToUpper() == letter.ToString())
+        {
+          emphasis = components.Count;
+        }
+      }
+    }
+    Console.WriteLine ("\nParsed '" + print() + "' with emphasis on '" + components[emphasis].ToUpper() + "'.");
   }
 
   public string print()

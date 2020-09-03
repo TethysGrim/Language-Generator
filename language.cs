@@ -40,19 +40,14 @@ public class Language {
     for (int i = 0; i < 25; i++)
     {
       Word newWord = new Word();
-      newWord.Assemble(syllables);
-      Console.WriteLine("\n- " + newWord.print());
-      Console.WriteLine(newWord.printEmph());
+      newWord.initialize(syllables);
+      //Console.WriteLine("\n- " + newWord.print());
+      //Console.WriteLine(newWord.printEmph());
 
       vocabulary.Add(newWord);
     }
 
     name = vocabulary[0].print();
-
-    Console.WriteLine("");
-    saveAlphabet();
-    saveSyllables();
-    saveVocab();
   }
 
   public void weightVowels()
@@ -230,5 +225,67 @@ public class Language {
     }
 
     Console.WriteLine("Vocabulary saved.");
+  }
+
+  public void loadAlpha(string _langname)
+  {
+    // Read each line of the file into a string array. Each element
+    // of the array is one line of the file.
+    string[] lines = System.IO.File.ReadAllLines("languages/alpha_" + _langname + ".txt");
+
+    foreach (char letter in lines[0])
+    {
+      weightedVowels.Add(letter.ToString());
+      // Use a tab to indent each line of the file.
+      Console.Write(letter);
+    }
+    Console.WriteLine("\nVowels loaded.\n");
+    
+    foreach (char letter in lines[1])
+    {
+      weightedSoftcs.Add(letter.ToString());
+      // Use a tab to indent each line of the file.
+      Console.Write(letter);
+    }
+    Console.WriteLine("\nSoft consonants loaded.\n");
+    
+    foreach (char letter in lines[2])
+    {
+      weightedHardcs.Add(letter.ToString());
+      // Use a tab to indent each line of the file.
+      Console.Write(letter);
+    }
+    Console.Write(weightedHardcs.ToString());
+    Console.WriteLine("\nHard consonants loaded.\n");
+  }
+
+  public void loadSyllables(string _langname)
+  {
+    // Read each line of the file into a string array. Each element
+    // of the array is one line of the file.
+    string[] lines = System.IO.File.ReadAllLines("languages/syl_" + _langname + ".txt");
+
+    foreach (string line in lines)
+    {
+      syllables.Add(line);
+      Console.WriteLine("Syllable '" + line + "' loaded.");
+    }
+    Console.WriteLine("Syllables loaded.");
+  }
+
+  public void loadVocab(string _langname)
+  {
+    // Read each line of the file into a string array. Each element
+    // of the array is one line of the file.
+    string[] lines = System.IO.File.ReadAllLines("languages/vocab_" + _langname + ".txt");
+
+    foreach (string line in lines)
+    {
+      Word newWord = new Word();
+      newWord.parse(line);
+      vocabulary.Add(newWord);
+      Console.WriteLine("Word '" + newWord.printEmph() + "' loaded successfully.");
+    }
+    Console.WriteLine("\nAll words loaded successfully.");
   }
 }
