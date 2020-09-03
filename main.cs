@@ -21,7 +21,7 @@ class MainClass {
     char choice = ' ';
     Console.WriteLine("Language Generator");
 
-    while (choice != 'Q')
+    while (char.ToUpper(choice) != 'Q')
     {
       Console.WriteLine("\n0: [G]enerate new Language");
       Console.WriteLine("1: [L]oad a saved Language");
@@ -38,7 +38,7 @@ class MainClass {
       choice = Console.ReadLine()[0];
 
       // Generate a new Language
-      if ((choice == '0') || (choice == 'G'))
+      if ((choice == '0') || (char.ToUpper(choice) == 'G'))
       {
         if (languages.Count <= 10)
         {
@@ -55,9 +55,9 @@ class MainClass {
       }
 
       // Load a saved Language
-      if ((choice == '1') || (choice == 'L'))
+      if ((choice == '1') || (char.ToUpper(choice) == 'L'))
       {
-        Console.WriteLine("I'm sorry, that option is not yet available");
+        Console.WriteLine("I'm sorry, that option is not yet available.");
       }
 
       // Add Words to existing Language
@@ -94,7 +94,7 @@ class MainClass {
         // Add the words
         for (int i = 0; i < 25; i++)
         {
-          Console.WriteLine("Adding word " + i + " to " + languages[subChoice].name + ".");
+          //Console.WriteLine("Adding word " + i + " to " + languages[subChoice].name + ".");
           Word newWord = new Word();
           newWord.initialize(languages[subChoice].syllables);
           languages[subChoice].vocabulary.Add(newWord);
@@ -103,7 +103,7 @@ class MainClass {
       }
 
       // View all Words in Language
-      if (((choice == '3') || (choice == 'V')) && (languages.Count != 0))
+      if (((choice == '3') || (char.ToUpper(choice) == 'V')) && (languages.Count != 0))
       {
         int subChoice = -1;
         if (languages.Count > 1)
@@ -149,7 +149,7 @@ class MainClass {
       }
 
       // Get Random Word from Language
-      if (((choice == '4') || (choice == 'W')) && (languages.Count != 0))
+      if (((choice == '4') || (char.ToUpper(choice) == 'W')) && (languages.Count != 0))
       {
         int subChoice = -1;
         if (languages.Count > 1)
@@ -187,9 +187,40 @@ class MainClass {
       }
 
       // Save a Language
-      if (((choice == '5') || (choice == 'S')) && (languages.Count != 0))
+      if (((choice == '5') || (char.ToUpper(choice) == 'S')) && (languages.Count != 0))
       {
-        Console.WriteLine("I'm sorry, that option is not yet available");
+        int subChoice = -1;
+        if (languages.Count > 1)
+        {
+          for (int i = 0; i < languages.Count; i++)
+          {
+            Console.WriteLine(i + ": " + languages[i].name);
+          }
+          Console.WriteLine("\nPlease choose a language option:");
+          
+          // Ensure valid input
+          while ((0 > subChoice) || (subChoice >= languages.Count))
+          {
+            subChoice = (int)Char.GetNumericValue(Console.ReadLine()[0]);
+            if ((0 > subChoice) || (subChoice >= languages.Count))
+            {
+              Console.WriteLine("Please enter a number between 0 and " + (languages.Count - 1) + " to choose your language:");
+            }
+            else
+            {
+              Console.WriteLine("You have selected " + subChoice);
+            }
+          }
+        }
+        else
+        {
+          subChoice = 0;
+        }
+
+        languages[subChoice].saveAlphabet();
+        languages[subChoice].saveSyllables();
+        languages[subChoice].saveVocab();
+        Console.WriteLine("Language '" + languages[subChoice].name + "' saved.");
       }
     }
     Console.WriteLine("Thank you for checking out my language generator.");

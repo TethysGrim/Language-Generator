@@ -92,4 +92,22 @@ public class Word
 
     return outp;
   }
+
+  public string printCap()
+  {
+    string outp = "";
+    string name = print();
+    for (int i = 0; i < name.Length; i++)
+    {
+      if (i == 0)
+      {
+        outp += char.ToUpper(name[i]);
+      }
+      else
+      {
+        outp += char.ToLower(name[i]);
+      }
+    }
+    return outp;
+  }
 }

@@ -47,7 +47,7 @@ public class Language {
       vocabulary.Add(newWord);
     }
 
-    name = vocabulary[0].print();
+    name = vocabulary[0].printCap();
   }
 
   public void weightVowels()
@@ -143,7 +143,7 @@ public class Language {
 
   public void saveAlphabet()
   {
-    Console.WriteLine("Saving alphabet weights...");
+    //Console.WriteLine("Saving alphabet weights...");
 
     string fileName = "languages/alpha_" + name + ".txt";
     // Check if file already exists. If yes, delete it.     
@@ -182,7 +182,7 @@ public class Language {
 
   public void saveSyllables()
   {
-    Console.WriteLine("Saving syllables...");
+    //Console.WriteLine("Saving syllables...");
 
     string fileName = "languages/syl_" + name + ".txt";
     //Check if file already exists. If yes, delete it.
@@ -205,7 +205,7 @@ public class Language {
 
   public void saveVocab()
   {
-    Console.WriteLine("Saving vocabulary...");
+    //Console.WriteLine("Saving vocabulary...");
 
     string fileName = "languages/vocab_" + name + ".txt";
     //Check if file already exists. If yes, delete it.
@@ -220,7 +220,7 @@ public class Language {
       for (int i = 0; i < vocabulary.Count; i++)
       {
         sw.WriteLine(vocabulary[i].printEmph());
-        Console.WriteLine("Saving '" + vocabulary[i].print() + "'.");
+        //Console.WriteLine("Saving '" + vocabulary[i].print() + "'.");
       }
     }
 
