@@ -145,7 +145,7 @@ public class Language {
   {
     //Console.WriteLine("Saving alphabet weights...");
 
-    string fileName = "languages/alpha_" + name + ".txt";
+    string fileName = "languages/" + name + "_ALPHA.txt";
     // Check if file already exists. If yes, delete it.     
     if (File.Exists(fileName))    
     {    
@@ -184,7 +184,7 @@ public class Language {
   {
     //Console.WriteLine("Saving syllables...");
 
-    string fileName = "languages/syl_" + name + ".txt";
+    string fileName = "languages/" + name + "_SYL.txt";
     //Check if file already exists. If yes, delete it.
     if (File.Exists(fileName))    
     {    
@@ -207,7 +207,7 @@ public class Language {
   {
     //Console.WriteLine("Saving vocabulary...");
 
-    string fileName = "languages/vocab_" + name + ".txt";
+    string fileName = "languages/" + name + "_VOCAB.txt";
     //Check if file already exists. If yes, delete it.
     if (File.Exists(fileName))    
     {    
@@ -231,7 +231,7 @@ public class Language {
   {
     // Read each line of the file into a string array. Each element
     // of the array is one line of the file.
-    string[] lines = System.IO.File.ReadAllLines("languages/alpha_" + _langname + ".txt");
+    string[] lines = System.IO.File.ReadAllLines("languages/" + _langname + "_ALPHA.txt");
 
     foreach (char letter in lines[0])
     {
@@ -263,7 +263,7 @@ public class Language {
   {
     // Read each line of the file into a string array. Each element
     // of the array is one line of the file.
-    string[] lines = System.IO.File.ReadAllLines("languages/syl_" + _langname + ".txt");
+    string[] lines = System.IO.File.ReadAllLines("languages/" + _langname + "_SYL.txt");
 
     foreach (string line in lines)
     {
@@ -277,7 +277,7 @@ public class Language {
   {
     // Read each line of the file into a string array. Each element
     // of the array is one line of the file.
-    string[] lines = System.IO.File.ReadAllLines("languages/vocab_" + _langname + ".txt");
+    string[] lines = System.IO.File.ReadAllLines("languages/" + _langname + "_VOCAB.txt");
 
     foreach (string line in lines)
     {

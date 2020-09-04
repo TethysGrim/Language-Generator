@@ -35,7 +35,14 @@ class MainClass {
       Console.WriteLine("Q: Quit");
 
       Console.WriteLine("\nPlease choose an option: ");
-      choice = Console.ReadLine()[0];
+
+      string rawInput = "";
+      // Prevent non-input crash
+      while (rawInput == "")
+      {
+        rawInput = Console.ReadLine();
+      }
+      choice = rawInput[0];
 
       // Generate a new Language
       if ((choice == '0') || (char.ToUpper(choice) == 'G'))
@@ -58,10 +65,16 @@ class MainClass {
       if ((choice == '1') || (char.ToUpper(choice) == 'L'))
       {
         Console.WriteLine("I'm sorry, that option is not yet available.");
+
+        // string[] filePaths = Directory.GetFiles(@"/languages", "*.txt");
+        // List<string> vocabFiles = new List<string>();
+        // List<string> sylFiles = new List<string>();
+        // List<string> alphaFiles = new List<string>();
+        // 
       }
 
       // Add Words to existing Language
-      if (((choice == '2') || (choice == 'A')) && (languages.Count != 0))
+      if (((choice == '2') || (char.ToUpper(choice) == 'A')) && (languages.Count != 0))
       {
         int subChoice = -1;
         if (languages.Count > 1)
@@ -75,7 +88,14 @@ class MainClass {
           // Ensure valid input
           while ((0 > subChoice) || (subChoice >= languages.Count))
           {
-            subChoice = (int)Char.GetNumericValue(Console.ReadLine()[0]);
+            rawInput = "";
+            // Prevent non-input crash
+            while (rawInput == "")
+            {
+              rawInput = Console.ReadLine();
+            }
+            
+            subChoice = (int)Char.GetNumericValue(rawInput[0]);
             if ((0 > subChoice) || (subChoice >= languages.Count))
             {
               Console.WriteLine("Please enter a number between 0 and " + (languages.Count - 1) + " to choose your language:");
@@ -117,7 +137,14 @@ class MainClass {
           // Ensure valid input
           while ((0 > subChoice) || (subChoice >= languages.Count))
           {
-            subChoice = (int)Char.GetNumericValue(Console.ReadLine()[0]);
+            rawInput = "";
+            // Prevent non-input crash
+            while (rawInput == "")
+            {
+              rawInput = Console.ReadLine();
+            }
+
+            subChoice = (int)Char.GetNumericValue(rawInput[0]);
             if ((0 > subChoice) || (subChoice >= languages.Count))
             {
               Console.WriteLine("Please enter a number between 0 and " + (languages.Count - 1) + " to choose your language:");
@@ -163,7 +190,14 @@ class MainClass {
           // Ensure valid input
           while ((0 > subChoice) || (subChoice >= languages.Count))
           {
-            subChoice = (int)Char.GetNumericValue(Console.ReadLine()[0]);
+            rawInput = "";
+            // Prevent non-input crash
+            while (rawInput == "")
+            {
+              rawInput = Console.ReadLine();
+            }
+            
+            subChoice = (int)Char.GetNumericValue(rawInput[0]);
             if ((0 > subChoice) || (subChoice >= languages.Count))
             {
               Console.WriteLine("Please enter a number between 0 and " + (languages.Count - 1) + " to choose your language:");
@@ -201,7 +235,14 @@ class MainClass {
           // Ensure valid input
           while ((0 > subChoice) || (subChoice >= languages.Count))
           {
-            subChoice = (int)Char.GetNumericValue(Console.ReadLine()[0]);
+            rawInput = "";
+            // Prevent non-input crash
+            while (rawInput == "")
+            {
+              rawInput = Console.ReadLine();
+            }
+            
+            subChoice = (int)Char.GetNumericValue(rawInput[0]);
             if ((0 > subChoice) || (subChoice >= languages.Count))
             {
               Console.WriteLine("Please enter a number between 0 and " + (languages.Count - 1) + " to choose your language:");
